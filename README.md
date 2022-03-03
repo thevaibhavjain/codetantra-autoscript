@@ -1,5 +1,5 @@
 # Codetantra autoscript
-Automation Script to automatically connect you to codetatantra online classes (whenever available) with selenium.
+Automation Script to automatically connect you to codetantra online classes (whenever available) with selenium.
 
 ### Installation
 
