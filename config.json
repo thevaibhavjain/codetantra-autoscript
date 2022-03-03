@@ -1,0 +1,8 @@
+{
+    "username": "codetantra_username",
+    "password": "codetantra_password",
+    "university_name_codetantra": "lovelyprofessionaluniversity",
+    "myclass_url": "https://myclass.lpu.in/",
+    "webdriver_executable_path": "/home/whitehats/.ZAP/webdriver/linux/64/chromedriver",
+    "refresh_time": 180
+}
