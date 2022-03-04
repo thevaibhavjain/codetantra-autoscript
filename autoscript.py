@@ -91,7 +91,12 @@ def main():
             meeting_data = fetch_meeting(json_token, mid)
             print("[*] Getting session url...")
             sess_url = get_session_url(meeting_data)
-            sess_url = get_session_token(sess_url)
+            try:
+                sess_url = get_session_token(sess_url)
+            except Exception:
+                print('[-] Class locating failed.. Retrying in 10 sec')
+                time.sleep(10)
+                continue
             print("[+] Connecting to the class...")
             connect2class(sess_url)
             active_sessions.append(mid)
