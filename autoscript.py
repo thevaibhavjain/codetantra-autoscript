@@ -90,10 +90,10 @@ def main():
             print("[+] Live meeting found: ", title)
             meeting_data = fetch_meeting(json_token, mid)
             print("[*] Getting session url...")
-            sess_url = get_session_url(meeting_data)
             try:
+                sess_url = get_session_url(meeting_data)
                 sess_url = get_session_token(sess_url)
-            except Exception:
+            except AttributeError:
                 print('[-] Class locating failed.. Retrying in 10 sec')
                 time.sleep(10)
                 continue
