@@ -2,6 +2,10 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import WebDriverException
 import requests, time, json
 from bs4 import BeautifulSoup
 
@@ -66,9 +70,13 @@ def get_session_token(url):
     return response.headers['location']
 
 def findnclick_xpath(xpath):
-    time.sleep(10)
-    listen = driver.find_element_by_xpath(xpath)
-    listen.click()
+    wait = WebDriverWait(driver, 3600)
+    click = lambda : wait.until(EC.element_to_be_clickable((By.XPATH, xpath))).click()
+    try:
+        click()
+    except WebDriverException as e:
+        time.sleep(10)
+        click()
 
 def connect2class(url):
     driver.get(url)
@@ -100,7 +108,8 @@ def main():
             print("[+] Connecting to the class...")
             connect2class(sess_url)
             active_sessions.append(mid)
-        else: print("[-] No live meeting found.. skipping")
+            print("[+] Connected successfully.")
+        else: print(f"[-] No more live meeting found. Refreshing in {config['refresh_time']}s")
         time.sleep(config["refresh_time"])
 
 if __name__ == '__main__':
